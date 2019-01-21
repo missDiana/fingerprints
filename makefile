@@ -3,7 +3,7 @@ INC=include
 BIN=bin
 SRCS=$(wildcard ${SRC}/*.cpp)
 OBJS=$(patsubst ${SRC}/%.cpp, ${BIN}/%.o, ${SRCS})
-TARGET_BINARY=${BIN}/util #[replace by target_binary_name]
+TARGET_BINARY=${BIN}/main #[replace by target_binary_name]
 CXX ?= g++  # or clang++
 CXXFLAGS += -I${INC} -std=c++14 -pedantic
 CXXFLAGS += -Wall -Wextra -Wno-unused
@@ -16,3 +16,11 @@ ${BIN}/%.o: ${SRC}/%.cpp
 clean:
 	rm -f ${OBJS}
 	rm -f ${TARGET_BINARY}
+
+doc:
+	doxygen
+html: doc
+	$(BROWSER) ${DOCS}/html/index.html
+pdf: doc
+	$(MAKE) -C ${DOCS}/latex
+	evince ${DOCS}/latex/refman.pdf
