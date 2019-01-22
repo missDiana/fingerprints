@@ -23,7 +23,7 @@ private:
 	@param j Coordinate of the pixel
 	@param n Number of directions
 	*/
-	static int getSection(int i,int j,int n);
+	static int getSection(int i,int j,int n, const Mat &image);
 
 	/**
 	Auxilary function to determine the parameter of the weight
@@ -42,7 +42,7 @@ private:
 	@param img2 The weak finger
 	@param num The number of directions
 	*/
-	static double *getClist(const Mat &img1, const Mat &img2,int num);
+	static double *getKlist(const Mat &img1, const Mat &img2,int num);
 
 	/**
 	 * Calculate the distance between two points
@@ -61,7 +61,7 @@ public:
 	@param img2 The weak finger
 	@param n Number of directions of anisotropy
 	*/
-	Mat static weakFinger(const Mat &img1, const Mat &img1, int n);
+	Mat static weakFinger(const Mat &img1, const Mat &img2, int n);
 };
 
 #endif
