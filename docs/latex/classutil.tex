@@ -1,0 +1,204 @@
+\hypertarget{classutil}{}\section{util Class Reference}
+\label{classutil}\index{util@{util}}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \hyperlink{classutil_a596403b6f926d79b5b255396442b0448}{distance} (int x1, int y1, int x2, int y2)
+\item 
+static Matrix\+Xd \hyperlink{classutil_a7985ee9ed77de47b0c30d6aae75c2ad7}{get\+Matrix} (const Mat \&img)
+\item 
+static Mat \hyperlink{classutil_a3bbdcf525b1e82a0557947fe0ef06188}{get\+Image} (const Matrix\+Xd \&m)
+\item 
+static double \hyperlink{classutil_ab4b1ca89e5931a845f0e5d9185508933}{get\+Major\+Axis} (const Matrix\+Xd \&image)
+\item 
+static double \hyperlink{classutil_afb1db2e9eba293d95574f08888747d29}{get\+Minor\+Axis} (const Matrix\+Xd \&image)
+\item 
+static Matrix\+Xd \hyperlink{classutil_ac5a3b3d50d093f41004cee793d624366}{bilinear\+\_\+inter} (const Matrix\+Xd \&m)
+\item 
+static void \hyperlink{classutil_a5042968702f7b3fe630935196f4d2bd8}{bicubic\+\_\+inter} (Matrix\+Xd \&m)
+\item 
+static void \hyperlink{classutil_a8abde4f7c16c31c85c05bd50d9e7a934}{get\+Info} (const Matrix\+Xd \&m, double $\ast$axisL, double $\ast$axisS, int $\ast$xc, int $\ast$yc)
+\item 
+static void \hyperlink{classutil_a7ff4ea2cfaaeafdec381a118eb25eab1}{range} (Mat img)
+\item 
+static Mat \hyperlink{classutil_acfaa3a9a9e5ab46dd12c785cb2530b16}{change\+Block} (Mat \&image)
+\item 
+static Mat \hyperlink{classutil_aba189e1b9b704f57998f38d78cf47a2a}{sym\+\_\+x} (Mat \&image)
+\item 
+static Mat \hyperlink{classutil_a075caed587185e920fab9e391e10be04}{sym\+\_\+y} (Mat \&image)
+\item 
+static Mat \hyperlink{classutil_a731556c9de6b8d77ecd6f456e73de6b8}{sym\+\_\+x\+\_\+diag} (Mat \&image)
+\item 
+static Mat \hyperlink{classutil_a9aec2603ab4ad8304d711fc58c4a6a4d}{sym\+\_\+y\+\_\+diag} (Mat \&image)
+\item 
+static void \hyperlink{classutil_a2f60474ad08d79e547208311a53760d0}{get\+Center} (const Matrix\+Xd \&m, int $\ast$x, int $\ast$y)
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \hyperlink{classutil_a344b2e3328a6ecabd315d4fc498beaf7}{fx} (int i, int j, Matrix\+Xd \&m)
+\item 
+static double \hyperlink{classutil_a0dcc5526a907ecc6228e452dcc0afd5f}{fy} (int i, int j, Matrix\+Xd \&m)
+\item 
+static double \hyperlink{classutil_a9b9bc5a4c1296e62e8136edd07b71fbc}{fxy} (int i, int j, Matrix\+Xd \&m)
+\item 
+static double \hyperlink{classutil_ac6acc3aa1d6efc181ce021afad9c7d1b}{power} (double a, double b)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{util@{util}!bicubic\+\_\+inter@{bicubic\+\_\+inter}}
+\index{bicubic\+\_\+inter@{bicubic\+\_\+inter}!util@{util}}
+\subsubsection[{\texorpdfstring{bicubic\+\_\+inter(\+Matrix\+Xd \&m)}{bicubic_inter(MatrixXd &m)}}]{\setlength{\rightskip}{0pt plus 5cm}void util\+::bicubic\+\_\+inter (
+\begin{DoxyParamCaption}
+\item[{Matrix\+Xd \&}]{m}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classutil_a5042968702f7b3fe630935196f4d2bd8}{}\label{classutil_a5042968702f7b3fe630935196f4d2bd8}
+The bicubic interpolation. Pixels need interpolating should = -\/1 \index{util@{util}!bilinear\+\_\+inter@{bilinear\+\_\+inter}}
+\index{bilinear\+\_\+inter@{bilinear\+\_\+inter}!util@{util}}
+\subsubsection[{\texorpdfstring{bilinear\+\_\+inter(const Matrix\+Xd \&m)}{bilinear_inter(const MatrixXd &m)}}]{\setlength{\rightskip}{0pt plus 5cm}Matrix\+Xd util\+::bilinear\+\_\+inter (
+\begin{DoxyParamCaption}
+\item[{const Matrix\+Xd \&}]{m}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classutil_ac5a3b3d50d093f41004cee793d624366}{}\label{classutil_ac5a3b3d50d093f41004cee793d624366}
+The bilinear interpolation. Pixels need interpolating should = -\/1 \index{util@{util}!change\+Block@{change\+Block}}
+\index{change\+Block@{change\+Block}!util@{util}}
+\subsubsection[{\texorpdfstring{change\+Block(\+Mat \&image)}{changeBlock(Mat &image)}}]{\setlength{\rightskip}{0pt plus 5cm}Mat util\+::change\+Block (
+\begin{DoxyParamCaption}
+\item[{Mat \&}]{image}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classutil_acfaa3a9a9e5ab46dd12c785cb2530b16}{}\label{classutil_acfaa3a9a9e5ab46dd12c785cb2530b16}
+change some blocks of an image into black and white \index{util@{util}!distance@{distance}}
+\index{distance@{distance}!util@{util}}
+\subsubsection[{\texorpdfstring{distance(int x1, int y1, int x2, int y2)}{distance(int x1, int y1, int x2, int y2)}}]{\setlength{\rightskip}{0pt plus 5cm}double util\+::distance (
+\begin{DoxyParamCaption}
+\item[{int}]{x1, }
+\item[{int}]{y1, }
+\item[{int}]{x2, }
+\item[{int}]{y2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classutil_a596403b6f926d79b5b255396442b0448}{}\label{classutil_a596403b6f926d79b5b255396442b0448}
+The distance between two pixels \index{util@{util}!fx@{fx}}
+\index{fx@{fx}!util@{util}}
+\subsubsection[{\texorpdfstring{fx(int i, int j, Matrix\+Xd \&m)}{fx(int i, int j, MatrixXd &m)}}]{\setlength{\rightskip}{0pt plus 5cm}double util\+::fx (
+\begin{DoxyParamCaption}
+\item[{int}]{i, }
+\item[{int}]{j, }
+\item[{Matrix\+Xd \&}]{m}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classutil_a344b2e3328a6ecabd315d4fc498beaf7}{}\label{classutil_a344b2e3328a6ecabd315d4fc498beaf7}
+symmetric schemes for first order derivative on direction x \index{util@{util}!fxy@{fxy}}
+\index{fxy@{fxy}!util@{util}}
+\subsubsection[{\texorpdfstring{fxy(int i, int j, Matrix\+Xd \&m)}{fxy(int i, int j, MatrixXd &m)}}]{\setlength{\rightskip}{0pt plus 5cm}double util\+::fxy (
+\begin{DoxyParamCaption}
+\item[{int}]{i, }
+\item[{int}]{j, }
+\item[{Matrix\+Xd \&}]{m}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classutil_a9b9bc5a4c1296e62e8136edd07b71fbc}{}\label{classutil_a9b9bc5a4c1296e62e8136edd07b71fbc}
+symmetric schemes for second order derivative \index{util@{util}!fy@{fy}}
+\index{fy@{fy}!util@{util}}
+\subsubsection[{\texorpdfstring{fy(int i, int j, Matrix\+Xd \&m)}{fy(int i, int j, MatrixXd &m)}}]{\setlength{\rightskip}{0pt plus 5cm}double util\+::fy (
+\begin{DoxyParamCaption}
+\item[{int}]{i, }
+\item[{int}]{j, }
+\item[{Matrix\+Xd \&}]{m}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classutil_a0dcc5526a907ecc6228e452dcc0afd5f}{}\label{classutil_a0dcc5526a907ecc6228e452dcc0afd5f}
+symmetric schemes for first order derivative on direction y \index{util@{util}!get\+Center@{get\+Center}}
+\index{get\+Center@{get\+Center}!util@{util}}
+\subsubsection[{\texorpdfstring{get\+Center(const Matrix\+Xd \&m, int $\ast$x, int $\ast$y)}{getCenter(const MatrixXd &m, int *x, int *y)}}]{\setlength{\rightskip}{0pt plus 5cm}void util\+::get\+Center (
+\begin{DoxyParamCaption}
+\item[{const Matrix\+Xd \&}]{m, }
+\item[{int $\ast$}]{x, }
+\item[{int $\ast$}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classutil_a2f60474ad08d79e547208311a53760d0}{}\label{classutil_a2f60474ad08d79e547208311a53760d0}
+Restore the center of the fingerprint into x and y \index{util@{util}!get\+Image@{get\+Image}}
+\index{get\+Image@{get\+Image}!util@{util}}
+\subsubsection[{\texorpdfstring{get\+Image(const Matrix\+Xd \&m)}{getImage(const MatrixXd &m)}}]{\setlength{\rightskip}{0pt plus 5cm}Mat util\+::get\+Image (
+\begin{DoxyParamCaption}
+\item[{const Matrix\+Xd \&}]{m}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classutil_a3bbdcf525b1e82a0557947fe0ef06188}{}\label{classutil_a3bbdcf525b1e82a0557947fe0ef06188}
+convert matrix into Mat image file \index{util@{util}!get\+Info@{get\+Info}}
+\index{get\+Info@{get\+Info}!util@{util}}
+\subsubsection[{\texorpdfstring{get\+Info(const Matrix\+Xd \&m, double $\ast$axis\+L, double $\ast$axis\+S, int $\ast$xc, int $\ast$yc)}{getInfo(const MatrixXd &m, double *axisL, double *axisS, int *xc, int *yc)}}]{\setlength{\rightskip}{0pt plus 5cm}void util\+::get\+Info (
+\begin{DoxyParamCaption}
+\item[{const Matrix\+Xd \&}]{m, }
+\item[{double $\ast$}]{axisL, }
+\item[{double $\ast$}]{axisS, }
+\item[{int $\ast$}]{xc, }
+\item[{int $\ast$}]{yc}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classutil_a8abde4f7c16c31c85c05bd50d9e7a934}{}\label{classutil_a8abde4f7c16c31c85c05bd50d9e7a934}
+The values of major axis, minor axis, coordinate of the center are resp. restored in axisL, axisS, xc and yc \index{util@{util}!get\+Major\+Axis@{get\+Major\+Axis}}
+\index{get\+Major\+Axis@{get\+Major\+Axis}!util@{util}}
+\subsubsection[{\texorpdfstring{get\+Major\+Axis(const Matrix\+Xd \&image)}{getMajorAxis(const MatrixXd &image)}}]{\setlength{\rightskip}{0pt plus 5cm}double util\+::get\+Major\+Axis (
+\begin{DoxyParamCaption}
+\item[{const Matrix\+Xd \&}]{image}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classutil_ab4b1ca89e5931a845f0e5d9185508933}{}\label{classutil_ab4b1ca89e5931a845f0e5d9185508933}
+Return the major axis of the fingerprint \index{util@{util}!get\+Matrix@{get\+Matrix}}
+\index{get\+Matrix@{get\+Matrix}!util@{util}}
+\subsubsection[{\texorpdfstring{get\+Matrix(const Mat \&img)}{getMatrix(const Mat &img)}}]{\setlength{\rightskip}{0pt plus 5cm}Matrix\+Xd util\+::get\+Matrix (
+\begin{DoxyParamCaption}
+\item[{const Mat \&}]{img}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classutil_a7985ee9ed77de47b0c30d6aae75c2ad7}{}\label{classutil_a7985ee9ed77de47b0c30d6aae75c2ad7}
+convert Mat image file into matrix \index{util@{util}!get\+Minor\+Axis@{get\+Minor\+Axis}}
+\index{get\+Minor\+Axis@{get\+Minor\+Axis}!util@{util}}
+\subsubsection[{\texorpdfstring{get\+Minor\+Axis(const Matrix\+Xd \&image)}{getMinorAxis(const MatrixXd &image)}}]{\setlength{\rightskip}{0pt plus 5cm}double util\+::get\+Minor\+Axis (
+\begin{DoxyParamCaption}
+\item[{const Matrix\+Xd \&}]{image}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classutil_afb1db2e9eba293d95574f08888747d29}{}\label{classutil_afb1db2e9eba293d95574f08888747d29}
+Return the minor axis of the fingerprint \index{util@{util}!power@{power}}
+\index{power@{power}!util@{util}}
+\subsubsection[{\texorpdfstring{power(double a, double b)}{power(double a, double b)}}]{\setlength{\rightskip}{0pt plus 5cm}double util\+::power (
+\begin{DoxyParamCaption}
+\item[{double}]{a, }
+\item[{double}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classutil_ac6acc3aa1d6efc181ce021afad9c7d1b}{}\label{classutil_ac6acc3aa1d6efc181ce021afad9c7d1b}
+if b$>$=0 return a$^\wedge$b, else return 0 \index{util@{util}!range@{range}}
+\index{range@{range}!util@{util}}
+\subsubsection[{\texorpdfstring{range(\+Mat img)}{range(Mat img)}}]{\setlength{\rightskip}{0pt plus 5cm}void util\+::range (
+\begin{DoxyParamCaption}
+\item[{Mat}]{img}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classutil_a7ff4ea2cfaaeafdec381a118eb25eab1}{}\label{classutil_a7ff4ea2cfaaeafdec381a118eb25eab1}
+Print the max and min intensity in a grey scale image \index{util@{util}!sym\+\_\+x@{sym\+\_\+x}}
+\index{sym\+\_\+x@{sym\+\_\+x}!util@{util}}
+\subsubsection[{\texorpdfstring{sym\+\_\+x(\+Mat \&image)}{sym_x(Mat &image)}}]{\setlength{\rightskip}{0pt plus 5cm}Mat util\+::sym\+\_\+x (
+\begin{DoxyParamCaption}
+\item[{Mat \&}]{image}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classutil_aba189e1b9b704f57998f38d78cf47a2a}{}\label{classutil_aba189e1b9b704f57998f38d78cf47a2a}
+Symmetric transform along the axis x \index{util@{util}!sym\+\_\+x\+\_\+diag@{sym\+\_\+x\+\_\+diag}}
+\index{sym\+\_\+x\+\_\+diag@{sym\+\_\+x\+\_\+diag}!util@{util}}
+\subsubsection[{\texorpdfstring{sym\+\_\+x\+\_\+diag(\+Mat \&image)}{sym_x_diag(Mat &image)}}]{\setlength{\rightskip}{0pt plus 5cm}Mat util\+::sym\+\_\+x\+\_\+diag (
+\begin{DoxyParamCaption}
+\item[{Mat \&}]{image}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classutil_a731556c9de6b8d77ecd6f456e73de6b8}{}\label{classutil_a731556c9de6b8d77ecd6f456e73de6b8}
+Symmetric transform along the diagonal x \index{util@{util}!sym\+\_\+y@{sym\+\_\+y}}
+\index{sym\+\_\+y@{sym\+\_\+y}!util@{util}}
+\subsubsection[{\texorpdfstring{sym\+\_\+y(\+Mat \&image)}{sym_y(Mat &image)}}]{\setlength{\rightskip}{0pt plus 5cm}Mat util\+::sym\+\_\+y (
+\begin{DoxyParamCaption}
+\item[{Mat \&}]{image}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classutil_a075caed587185e920fab9e391e10be04}{}\label{classutil_a075caed587185e920fab9e391e10be04}
+Symmetric transform along the axis y \index{util@{util}!sym\+\_\+y\+\_\+diag@{sym\+\_\+y\+\_\+diag}}
+\index{sym\+\_\+y\+\_\+diag@{sym\+\_\+y\+\_\+diag}!util@{util}}
+\subsubsection[{\texorpdfstring{sym\+\_\+y\+\_\+diag(\+Mat \&image)}{sym_y_diag(Mat &image)}}]{\setlength{\rightskip}{0pt plus 5cm}Mat util\+::sym\+\_\+y\+\_\+diag (
+\begin{DoxyParamCaption}
+\item[{Mat \&}]{image}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classutil_a9aec2603ab4ad8304d711fc58c4a6a4d}{}\label{classutil_a9aec2603ab4ad8304d711fc58c4a6a4d}
+Symmetric transform along the diagonal y 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/util.\+h\item 
+src/util.\+cpp\end{DoxyCompactItemize}
