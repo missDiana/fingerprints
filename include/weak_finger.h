@@ -10,10 +10,39 @@ using namespace cv;
 using namespace std;
 class weak_finger {
 private:
-	static double function_c1 (double r,double c);
-	static int getSection(int i,int j,int n,int xc,int yc);
-	static double calcul_c(const Mat &img1, const Mat &img2,int xc,int yc,double degre1, double degre2);
-	static double *getClist(const Mat &img1, const Mat &img2,int xc,int yc,int num);
+	/**
+	Weight function for the weak pressure approximation
+	@param r The distance between (x,y) and the center
+	@param c A parameter of the function
+	*/
+	static double function_c1 (double r,double k);
+
+	/**
+	Auxilary function to determine the direction that a pixel belongs to
+	@param i Coordinate of the pixel
+	@param j Coordinate of the pixel
+	@param n Number of directions
+	*/
+	static int getSection(int i,int j,int n);
+
+	/**
+	Auxilary function to determine the parameter of the weight
+	function in a direction defined by the space between two lines in the polar system
+	@param img1 The clean finger
+	@param img2 The weak finger
+	@param degree1 The coordinate theta in polar system of the first line
+	@param degree2 The coordinate theta in polar system of the second line
+	*/
+	static double calcul_k(const Mat &img1, const Mat &img2,double degree1, double degree2);
+
+	/**
+	Auxilary function to determine the parameter of the weight
+	function in different directions
+	@param img1 The clean finger
+	@param img2 The weak finger
+	@param num The number of directions
+	*/
+	static double *getClist(const Mat &img1, const Mat &img2,int num);
 
 	/**
 	 * Calculate the distance between two points
@@ -26,7 +55,13 @@ private:
 	double static distance(int x1, int y1, int x2, int y2);
 
 public:
-	Mat static weakFinger(Mat &image, int xc, int yc,double *c,double a,double b,int n);
+	/**
+	Perform an approximation of a weak finger
+	@param img1 The clean finger
+	@param img2 The weak finger
+	@param n Number of directions of anisotropy
+	*/
+	Mat static weakFinger(const Mat &img1, const Mat &img1, int n);
 };
 
 #endif
