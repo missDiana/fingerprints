@@ -3,27 +3,114 @@
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static Matrix\+Xd {\bfseries rotation} (const Matrix\+Xd \&m, double angle, int xc, int yc)\hypertarget{classwarping_a478d01f5448e5264668ea80b1a7eaf12}{}\label{classwarping_a478d01f5448e5264668ea80b1a7eaf12}
-
+static Matrix\+Xd \hyperlink{classwarping_a478d01f5448e5264668ea80b1a7eaf12}{rotation} (const Matrix\+Xd \&m, double angle, int xc, int yc)
 \item 
-static Matrix\+Xd {\bfseries translation} (const Matrix\+Xd \&m, int a, int b)\hypertarget{classwarping_a80292615cbce58308f9e9f905518785f}{}\label{classwarping_a80292615cbce58308f9e9f905518785f}
-
+static Matrix\+Xd \hyperlink{classwarping_a80292615cbce58308f9e9f905518785f}{translation} (const Matrix\+Xd \&m, int a, int b)
 \item 
-static Matrix\+Xd {\bfseries euclidien} (const Matrix\+Xd \&m, double angle, int a, int b, int xc, int yc)\hypertarget{classwarping_a6cb783f67401cf614813d95f8e4120c8}{}\label{classwarping_a6cb783f67401cf614813d95f8e4120c8}
-
+static Matrix\+Xd \hyperlink{classwarping_a6cb783f67401cf614813d95f8e4120c8}{euclidien} (const Matrix\+Xd \&m, double angle, int a, int b, int xc, int yc)
 \item 
 static Mat {\bfseries warping\+Finger} (const Mat \&img1, const Mat \&img2)\hypertarget{classwarping_ac0e7bfe96c5f849784d8c9d2fa8e7ab8}{}\label{classwarping_ac0e7bfe96c5f849784d8c9d2fa8e7ab8}
-
-\item 
-static Mat {\bfseries warping\+Finger} (const Mat \&img1, const Mat \&img2)\hypertarget{classwarping_aeaffbb6334e05ab32a443bceeaf039c3}{}\label{classwarping_aeaffbb6334e05ab32a443bceeaf039c3}
 
 \end{DoxyCompactItemize}
 \subsection*{Static Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static double {\bfseries find\+Degree} (const Matrix\+Xd \&m1, double d)\hypertarget{classwarping_a726105ca6923d8e31db11b8296edcc24}{}\label{classwarping_a726105ca6923d8e31db11b8296edcc24}
-
+static double \hyperlink{classwarping_a726105ca6923d8e31db11b8296edcc24}{find\+Degree} (const Matrix\+Xd \&m1, double d)
 \end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{warping@{warping}!euclidien@{euclidien}}
+\index{euclidien@{euclidien}!warping@{warping}}
+\subsubsection[{\texorpdfstring{euclidien(const Matrix\+Xd \&m, double angle, int a, int b, int xc, int yc)}{euclidien(const MatrixXd &m, double angle, int a, int b, int xc, int yc)}}]{\setlength{\rightskip}{0pt plus 5cm}Matrix\+Xd warping\+::euclidien (
+\begin{DoxyParamCaption}
+\item[{const Matrix\+Xd \&}]{m, }
+\item[{double}]{angle, }
+\item[{int}]{a, }
+\item[{int}]{b, }
+\item[{int}]{xc, }
+\item[{int}]{yc}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classwarping_a6cb783f67401cf614813d95f8e4120c8}{}\label{classwarping_a6cb783f67401cf614813d95f8e4120c8}
+
+\begin{DoxyParams}{Parameters}
+{\em a} & is the translation in x coodrinates. \\
+\hline
+{\em b} & is the translation in y coodrinates. \\
+\hline
+{\em xc} & is the x part of the center of the image \\
+\hline
+{\em yc} & is the y part of the center of the image \\
+\hline
+{\em angle} & is the angle to which image is to be rotated \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+matrix generated after eucledian tranformation 
+\end{DoxyReturn}
+\index{warping@{warping}!find\+Degree@{find\+Degree}}
+\index{find\+Degree@{find\+Degree}!warping@{warping}}
+\subsubsection[{\texorpdfstring{find\+Degree(const Matrix\+Xd \&m1, double d)}{findDegree(const MatrixXd &m1, double d)}}]{\setlength{\rightskip}{0pt plus 5cm}double warping\+::find\+Degree (
+\begin{DoxyParamCaption}
+\item[{const Matrix\+Xd \&}]{m1, }
+\item[{double}]{d}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classwarping_a726105ca6923d8e31db11b8296edcc24}{}\label{classwarping_a726105ca6923d8e31db11b8296edcc24}
+
+\begin{DoxyParams}{Parameters}
+{\em d} & is the multiplication by which below loop changes. \\
+\hline
+{\em xc} & is the x part of the center of the image \\
+\hline
+{\em yc} & is the y part of the center of the image \\
+\hline
+{\em angle} & is the angle to which image is to be rotated \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the image matrix. 
+\end{DoxyReturn}
+\index{warping@{warping}!rotation@{rotation}}
+\index{rotation@{rotation}!warping@{warping}}
+\subsubsection[{\texorpdfstring{rotation(const Matrix\+Xd \&m, double angle, int xc, int yc)}{rotation(const MatrixXd &m, double angle, int xc, int yc)}}]{\setlength{\rightskip}{0pt plus 5cm}Matrix\+Xd warping\+::rotation (
+\begin{DoxyParamCaption}
+\item[{const Matrix\+Xd \&}]{m, }
+\item[{double}]{angle, }
+\item[{int}]{xc, }
+\item[{int}]{yc}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classwarping_a478d01f5448e5264668ea80b1a7eaf12}{}\label{classwarping_a478d01f5448e5264668ea80b1a7eaf12}
+
+\begin{DoxyParams}{Parameters}
+{\em xc} & is the x part of the center of the image \\
+\hline
+{\em yc} & is the y part of the center of the image \\
+\hline
+{\em angle} & is the angle to which image is to be rotated \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+matrix generated after rotation of given angle. 
+\end{DoxyReturn}
+\index{warping@{warping}!translation@{translation}}
+\index{translation@{translation}!warping@{warping}}
+\subsubsection[{\texorpdfstring{translation(const Matrix\+Xd \&m, int a, int b)}{translation(const MatrixXd &m, int a, int b)}}]{\setlength{\rightskip}{0pt plus 5cm}Matrix\+Xd warping\+::translation (
+\begin{DoxyParamCaption}
+\item[{const Matrix\+Xd \&}]{m, }
+\item[{int}]{a, }
+\item[{int}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classwarping_a80292615cbce58308f9e9f905518785f}{}\label{classwarping_a80292615cbce58308f9e9f905518785f}
+
+\begin{DoxyParams}{Parameters}
+{\em a} & is the translation in x coodrinates. \\
+\hline
+{\em b} & is the translation in y coodrinates. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+matrix generated after translation. 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

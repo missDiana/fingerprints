@@ -3,29 +3,45 @@
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static Mat {\bfseries weak\+Finger} (Mat \&image, int xc, int yc, double $\ast$c, double a, double b, int n)\hypertarget{classweak__finger_aae78642bcd3c521265eb169a6c303ceb}{}\label{classweak__finger_aae78642bcd3c521265eb169a6c303ceb}
-
+static Mat \hyperlink{classweak__finger_ad3ecfc2d0a1e50984962e38e3ed65d2d}{weak\+Finger} (const Mat \&img1, const Mat \&img2, int n)
 \end{DoxyCompactItemize}
 \subsection*{Static Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static double {\bfseries function\+\_\+c1} (double r, double c)\hypertarget{classweak__finger_a5d28dfff1eb846e58c6fb9a3d8339aca}{}\label{classweak__finger_a5d28dfff1eb846e58c6fb9a3d8339aca}
-
+static double \hyperlink{classweak__finger_a7f52398fece111f0aefc46c1780faf0b}{function\+\_\+c1} (double r, double k)
 \item 
-static int {\bfseries get\+Section} (int i, int j, int n, int xc, int yc)\hypertarget{classweak__finger_a66c72e34708d6e37f63c004b78141eaa}{}\label{classweak__finger_a66c72e34708d6e37f63c004b78141eaa}
-
+static int \hyperlink{classweak__finger_ac5ca2f3040830e3fbf24a10bd85fbb55}{get\+Section} (int i, int j, int n, const Mat \&image)
 \item 
-static double {\bfseries calcul\+\_\+c} (const Mat \&img1, const Mat \&img2, int xc, int yc, double degre1, double degre2)\hypertarget{classweak__finger_ac616774a6f7f4171904ffe30702c505a}{}\label{classweak__finger_ac616774a6f7f4171904ffe30702c505a}
-
+static double \hyperlink{classweak__finger_acfa0a4cbe7e887aa30125f435ad7589b}{calcul\+\_\+k} (const Mat \&img1, const Mat \&img2, double degree1, double degree2)
 \item 
-double $\ast$static {\bfseries get\+Clist} (const Mat \&img1, const Mat \&img2, int xc, int yc, int num)\hypertarget{classweak__finger_a27f9293f3d1882a03a477296a65d16a4}{}\label{classweak__finger_a27f9293f3d1882a03a477296a65d16a4}
-
+static double $\ast$ \hyperlink{classweak__finger_a8142fad0eac385809328de534dc067ac}{get\+Klist} (const Mat \&img1, const Mat \&img2, int num)
 \item 
 static double \hyperlink{classweak__finger_ae121304f5306a04b1e0a40f3a678785c}{distance} (int x1, int y1, int x2, int y2)
 \end{DoxyCompactItemize}
 
 
 \subsection{Member Function Documentation}
+\index{weak\+\_\+finger@{weak\+\_\+finger}!calcul\+\_\+k@{calcul\+\_\+k}}
+\index{calcul\+\_\+k@{calcul\+\_\+k}!weak\+\_\+finger@{weak\+\_\+finger}}
+\subsubsection[{\texorpdfstring{calcul\+\_\+k(const Mat \&img1, const Mat \&img2, double degree1, double degree2)}{calcul_k(const Mat &img1, const Mat &img2, double degree1, double degree2)}}]{\setlength{\rightskip}{0pt plus 5cm}double weak\+\_\+finger\+::calcul\+\_\+k (
+\begin{DoxyParamCaption}
+\item[{const Mat \&}]{img1, }
+\item[{const Mat \&}]{img2, }
+\item[{double}]{degree1, }
+\item[{double}]{degree2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classweak__finger_acfa0a4cbe7e887aa30125f435ad7589b}{}\label{classweak__finger_acfa0a4cbe7e887aa30125f435ad7589b}
+Auxilary function to determine the parameter of the weight function in a direction defined by the space between two lines in the polar system 
+\begin{DoxyParams}{Parameters}
+{\em img1} & The clean finger \\
+\hline
+{\em img2} & The weak finger \\
+\hline
+{\em degree1} & The coordinate theta in polar system of the first line \\
+\hline
+{\em degree2} & The coordinate theta in polar system of the second line \\
+\hline
+\end{DoxyParams}
 \index{weak\+\_\+finger@{weak\+\_\+finger}!distance@{distance}}
 \index{distance@{distance}!weak\+\_\+finger@{weak\+\_\+finger}}
 \subsubsection[{\texorpdfstring{distance(int x1, int y1, int x2, int y2)}{distance(int x1, int y1, int x2, int y2)}}]{\setlength{\rightskip}{0pt plus 5cm}static double weak\+\_\+finger\+::distance (
@@ -50,8 +66,79 @@ Calculate the distance between two points
 \begin{DoxyReturn}{Returns}
 The distance between two points 
 \end{DoxyReturn}
+\index{weak\+\_\+finger@{weak\+\_\+finger}!function\+\_\+c1@{function\+\_\+c1}}
+\index{function\+\_\+c1@{function\+\_\+c1}!weak\+\_\+finger@{weak\+\_\+finger}}
+\subsubsection[{\texorpdfstring{function\+\_\+c1(double r, double k)}{function_c1(double r, double k)}}]{\setlength{\rightskip}{0pt plus 5cm}double weak\+\_\+finger\+::function\+\_\+c1 (
+\begin{DoxyParamCaption}
+\item[{double}]{r, }
+\item[{double}]{k}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classweak__finger_a7f52398fece111f0aefc46c1780faf0b}{}\label{classweak__finger_a7f52398fece111f0aefc46c1780faf0b}
+Weight function for the weak pressure approximation 
+\begin{DoxyParams}{Parameters}
+{\em r} & The distance between (x,y) and the center \\
+\hline
+{\em c} & A parameter of the function \\
+\hline
+\end{DoxyParams}
+\index{weak\+\_\+finger@{weak\+\_\+finger}!get\+Klist@{get\+Klist}}
+\index{get\+Klist@{get\+Klist}!weak\+\_\+finger@{weak\+\_\+finger}}
+\subsubsection[{\texorpdfstring{get\+Klist(const Mat \&img1, const Mat \&img2, int num)}{getKlist(const Mat &img1, const Mat &img2, int num)}}]{\setlength{\rightskip}{0pt plus 5cm}double $\ast$ weak\+\_\+finger\+::get\+Klist (
+\begin{DoxyParamCaption}
+\item[{const Mat \&}]{img1, }
+\item[{const Mat \&}]{img2, }
+\item[{int}]{num}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classweak__finger_a8142fad0eac385809328de534dc067ac}{}\label{classweak__finger_a8142fad0eac385809328de534dc067ac}
+Auxilary function to determine the parameter of the weight function in different directions 
+\begin{DoxyParams}{Parameters}
+{\em img1} & The clean finger \\
+\hline
+{\em img2} & The weak finger \\
+\hline
+{\em num} & The number of directions \\
+\hline
+\end{DoxyParams}
+\index{weak\+\_\+finger@{weak\+\_\+finger}!get\+Section@{get\+Section}}
+\index{get\+Section@{get\+Section}!weak\+\_\+finger@{weak\+\_\+finger}}
+\subsubsection[{\texorpdfstring{get\+Section(int i, int j, int n, const Mat \&image)}{getSection(int i, int j, int n, const Mat &image)}}]{\setlength{\rightskip}{0pt plus 5cm}int weak\+\_\+finger\+::get\+Section (
+\begin{DoxyParamCaption}
+\item[{int}]{i, }
+\item[{int}]{j, }
+\item[{int}]{n, }
+\item[{const Mat \&}]{image}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classweak__finger_ac5ca2f3040830e3fbf24a10bd85fbb55}{}\label{classweak__finger_ac5ca2f3040830e3fbf24a10bd85fbb55}
+Auxilary function to determine the direction that a pixel belongs to 
+\begin{DoxyParams}{Parameters}
+{\em i} & Coordinate of the pixel \\
+\hline
+{\em j} & Coordinate of the pixel \\
+\hline
+{\em n} & Number of directions \\
+\hline
+\end{DoxyParams}
+\index{weak\+\_\+finger@{weak\+\_\+finger}!weak\+Finger@{weak\+Finger}}
+\index{weak\+Finger@{weak\+Finger}!weak\+\_\+finger@{weak\+\_\+finger}}
+\subsubsection[{\texorpdfstring{weak\+Finger(const Mat \&img1, const Mat \&img2, int n)}{weakFinger(const Mat &img1, const Mat &img2, int n)}}]{\setlength{\rightskip}{0pt plus 5cm}Mat weak\+\_\+finger\+::weak\+Finger (
+\begin{DoxyParamCaption}
+\item[{const Mat \&}]{img1, }
+\item[{const Mat \&}]{img2, }
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classweak__finger_ad3ecfc2d0a1e50984962e38e3ed65d2d}{}\label{classweak__finger_ad3ecfc2d0a1e50984962e38e3ed65d2d}
+Perform an approximation of a weak finger 
+\begin{DoxyParams}{Parameters}
+{\em img1} & The clean finger \\
+\hline
+{\em img2} & The weak finger \\
+\hline
+{\em n} & Number of directions of anisotropy \\
+\hline
+\end{DoxyParams}
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-include/weak\+\_\+finger.\+h\end{DoxyCompactItemize}
+include/weak\+\_\+finger.\+h\item 
+src/weak\+\_\+finger.\+cpp\end{DoxyCompactItemize}

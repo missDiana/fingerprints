@@ -20,6 +20,8 @@ private:
 	*/
 
 	static double findDegree(const MatrixXd &m1,double d);
+
+
 public:
 
 	/**

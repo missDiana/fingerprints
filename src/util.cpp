@@ -90,34 +90,45 @@ double util::getMinorAxis(const MatrixXd &image) {
 }
 
 
-MatrixXd util::bilinear_inter(const MatrixXd &m) {
+MatrixXd util::bilinear_inter(const MatrixXd &m,double theta,int xc,int yc) {
 	MatrixXd mp = m;
 	for(int i=1;i<mp.rows()-1;i++){
 		for(int j=1;j<mp.cols()-1;j++){
 				if (mp(i,j)==-1) {
-					Vector4d p;
-					p << m(i-1,j-1), m(i-1,j+1), m(i+1,j-1), m(i+1,j+1);
+					Vector4d p,w;
+					double x,y;
+					x = (int)(cos(-theta)*(i-xc) - sin(-theta)*(j-yc)+xc);
+					y = (int)(sin(-theta)*(i-xc) + cos(-theta)*(j-yc)+xc);
+					if( x>0 && x+1<mp.rows() && y>0 && y+1<mp.cols()){
+					p << m(x,y), m(x+1,y), m(x,y+1), m(x+1,y+1);
+					w << 1/distance(x,y,xc,yc),1/distance(x+1,y,xc,yc),1/distance(x,y+1,xc,yc),1/distance(x+1,y+1,xc,yc);
+					w = (1/w.sum())*w;
+					/*
 					int n = 0;
 					double s = 0;
 					for (int k=0;k<4;k++) {
 						if(p(k)>=0) {
-							s = s + p(k);
+							s = s + p(k)*w(k);
 							n++;
 						}
 					}
 					if(n!=0) {
 						mp(i,j) = s/n;
 					}
+					*/
+					mp(i,j) = p.dot(w);
+				}
 				}
 		}
 	}
+	/*
 	for(int i=0;i<m.rows();i++){
 		for(int j=0;j<m.cols();j++){
 				if (mp(i,j)<0) {
 					mp(i,j)=1;
 				}
 		}
-	}
+	}*/
 	return mp;
 }
 

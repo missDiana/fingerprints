@@ -27,7 +27,7 @@ MatrixXd warping::rotation(const MatrixXd &m, double angle,int xc,int yc){
 				}
 		}
 	}
-  	return util::bilinear_inter(rm);
+  	return util::bilinear_inter(rm,angle,xc,yc);
 	//return rm;
 }
 
@@ -67,7 +67,7 @@ MatrixXd warping::euclidien(const MatrixXd &m, double angle,int a,int b,int xc,i
 				}
 		}
 	}
-	return util::bilinear_inter(rm);
+	return util::bilinear_inter(rm,angle,xc,yc);
 }
 
 double warping::findDegree(const MatrixXd &m1,double d) {

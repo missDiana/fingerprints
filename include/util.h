@@ -59,7 +59,7 @@ public:
 	/**
 	The bilinear interpolation. Pixels need interpolating should = -1
 	*/
-	static MatrixXd bilinear_inter(const MatrixXd &m);
+	static MatrixXd bilinear_inter(const MatrixXd &m,double theta,int xc,int yc);
 
 	/**
 	The bicubic interpolation. Pixels need interpolating should = -1
