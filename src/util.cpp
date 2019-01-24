@@ -11,6 +11,8 @@
 #include <Eigen/Dense>
 #include <fstream>
 
+
+/// Avoid using namespace in .cpp when it is not a main
 using namespace Eigen;
 using namespace cv;
 using namespace std;
@@ -18,7 +20,7 @@ using namespace std;
 
 
 //calculate distance between point(x1,y1) and (x2,y2)
-double util::distance(int x1, int y1, int x2, int y2){
+double util::distance(double x1, double y1, double x2, double y2){
 	return sqrt((((x1-x2)*(x1-x2))+((y1-y2)*(y1-y2))));
 }
 
@@ -39,7 +41,7 @@ Mat util::getImage(const MatrixXd &m) {
 	Mat img(m.rows(),m.cols(),CV_8UC1);
 	for(int i=0;i<img.rows;i++){
 		for(int j=0;j<img.cols;j++){
-			int val = (int)(m(i,j)*255);
+			int val = round(m(i,j)*255);
 			img.at<uchar>(i,j,0) = (uchar)val;
 		}
 	}
@@ -65,6 +67,7 @@ double util::getMajorAxis(const MatrixXd &image) {
 			a2 = d2;
 		}
 	}
+	cout<<"haha"<<endl;
 	return (a1+a2)/2;
 }
 
@@ -80,7 +83,7 @@ double util::getMinorAxis(const MatrixXd &image) {
 			b1 = d1;
 		}
 	}
-	for(int j=image.rows()-1;j>yc;j--) {
+	for(int j=image.cols()-1;j>yc;j--) {
 		double d2 = distance(xc,j,xc,yc);
 		if((d2>b2) & (image(xc,j)==0)) {
 			b2 = b2;
@@ -90,18 +93,21 @@ double util::getMinorAxis(const MatrixXd &image) {
 }
 
 
-MatrixXd util::bilinear_inter(const MatrixXd &m,double theta,int xc,int yc) {
-	MatrixXd mp = m;
+MatrixXd util::bilinear_inter(const MatrixXd &m,const MatrixXd &m_rotation,double theta,int xc,int yc) {
+	MatrixXd mp = m_rotation;
 	for(int i=1;i<mp.rows()-1;i++){
 		for(int j=1;j<mp.cols()-1;j++){
 				if (mp(i,j)==-1) {
 					Vector4d p,w;
 					double x,y;
-					x = (int)(cos(-theta)*(i-xc) - sin(-theta)*(j-yc)+xc);
-					y = (int)(sin(-theta)*(i-xc) + cos(-theta)*(j-yc)+xc);
-					if( x>0 && x+1<mp.rows() && y>0 && y+1<mp.cols()){
-					p << m(x,y), m(x+1,y), m(x,y+1), m(x+1,y+1);
-					w << 1/distance(x,y,xc,yc),1/distance(x+1,y,xc,yc),1/distance(x,y+1,xc,yc),1/distance(x+1,y+1,xc,yc);
+					int xint,yint;
+					x = cos(-theta)*(i-xc) - sin(-theta)*(j-yc)+xc;
+					y = sin(-theta)*(i-xc) + cos(-theta)*(j-yc)+yc;
+					xint = int(x);
+					yint = int(y);
+					if( x>0 && x+1<mp.rows() && y>0 && y+1<mp.cols()) {
+						p << m(xint,yint), m(xint+1,yint), m(xint,yint+1), m(xint+1,yint+1);
+						w << 1.0/util::distance(xint,yint,x,y),1.0/util::distance(xint+1,yint,x,y),1.0/util::distance(xint,yint+1,x,y),1.0/util::distance(xint+1,yint+1,x,y);
 					w = (1/w.sum())*w;
 					/*
 					int n = 0;
@@ -117,21 +123,99 @@ MatrixXd util::bilinear_inter(const MatrixXd &m,double theta,int xc,int yc) {
 					}
 					*/
 					mp(i,j) = p.dot(w);
+					//cout<<"m ="<<mp(i,j)<<endl;
 				}
-				}
+			}
 		}
 	}
-	/*
 	for(int i=0;i<m.rows();i++){
 		for(int j=0;j<m.cols();j++){
 				if (mp(i,j)<0) {
 					mp(i,j)=1;
 				}
 		}
-	}*/
+	}
 	return mp;
 }
 
+
+MatrixXd util::bilinear_inter_naive(const MatrixXd &m) {
+	MatrixXd mp = m;
+	for(int i=1;i<mp.rows()-1;i++){
+		for(int j=1;j<mp.cols()-1;j++){
+			if (mp(i,j)==-1) {
+				Vector4d p;
+				p << m(i-1,j-1),m(i-1,j+1),m(i+1,j-1),m(i+1,j+1);
+				int n = 0;
+				double s = 0;
+				for (int k=0;k<4;k++) {
+					if(p(k)>=0) {
+						s = s + p(k);
+						n++;
+					}
+				}
+				if(n!=0) {
+					mp(i,j) = s/n;
+				}
+			}
+		}
+	}
+	for(int i=0;i<m.rows();i++){
+		for(int j=0;j<m.cols();j++){
+			if (mp(i,j)<0) {
+				if(mp(i,j)>-1) {
+					mp(i,j)=0;
+				}
+				else {
+					mp(i,j)=1;
+				}
+			}
+		}
+	}
+
+	return mp;
+}
+
+
+MatrixXd util::bilinear_inter_squeeze(const MatrixXd &m,const MatrixXd &m_rotation,double t,double ratio,int k,int xc,int yc) {
+	MatrixXd mp = m_rotation;
+	for(int i=1;i<mp.rows()-1;i++){
+		for(int j=1;j<mp.cols()-1;j++){
+			if (mp(i,j)==-1) {
+				Vector4d p,w;
+				double x,y;
+				int xint,yint;
+				double theta = t*warping::squeezFunction(i,j,xc,yc,ratio,k);
+				x = cos(-theta)*(i-xc) - sin(-theta)*(j-yc)+xc;
+				y = sin(-theta)*(i-xc) + cos(-theta)*(j-yc)+yc;
+				double theta2 = t*warping::squeezFunction(x,y,xc,yc,ratio,k);
+				if(abs(theta-theta2)>0.5) cout<<"hahahaha"<<endl;
+				xint = int(x);
+				yint = int(y);
+				if ( xint>0 && xint+1<mp.rows() && yint>0 && yint+1<mp.cols()) {
+				p << m(xint,yint), m(xint+1,yint), m(xint,yint+1), m(xint+1,yint+1);
+				w << 1.0/util::distance(xint,yint,x,y),1.0/util::distance(xint+1,yint,x,y),1.0/util::distance(xint,yint+1,x,y),1.0/util::distance(xint+1,yint+1,x,y);
+				w = (1.0/w.sum())*w;
+				mp(i,j) = p.dot(w);
+				}
+			}
+		}
+	}
+	for(int i=0;i<m.rows();i++){
+		for(int j=0;j<m.cols();j++){
+				if (mp(i,j)<0) {
+					if(mp(i,j)>-1) {
+						mp(i,j)=0;
+					}
+					else {
+						mp(i,j)=1;
+					}
+				}
+		}
+	}
+
+	return mp;
+}
 
 double util::fx(int i,int j,MatrixXd &m) {
 	return (m(i+1,j)-m(i-1,j))/2;
@@ -228,8 +312,8 @@ void util::bicubic_inter(MatrixXd &m) {
 	}
 	for(int i=0;i<2*rm.rows();i++){
 		for(int j=0;j<2*rm.cols();j++){
-				int ip = (int)(cos(angle)*i - sin(angle)*j);
-				int jp = (int)(sin(angle)*i +cos(angle)*j);
+				int ip = round(cos(angle)*i - sin(angle)*j);
+				int jp = round(sin(angle)*i +cos(angle)*j);
 				if((ip>=0) & (ip<rm.rows()) & (jp>=0) & (jp<rm.cols())) {
 					rm(ip,jp) = m(i,j);
 				}
@@ -255,8 +339,8 @@ void util::getInfo(const MatrixXd &m,double *axisL,double *axisS,int *xc,int *yc
 	}
 	*axisL = (a2-a1)/2;
 	*axisS = (b2-b1)/2;
-	*xc = (int)((a1+a2)/2);
-	*yc = (int)((b1+b2)/2);
+	*xc = round((a1+a2)/2);
+	*yc = round((b1+b2)/2);
 }
 
 void util::range(Mat img) {

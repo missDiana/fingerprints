@@ -5,13 +5,10 @@
 #include <iostream>
 #include <Eigen/Dense>
 #include <fstream>
-using namespace Eigen;
-using namespace cv;
-using namespace std;
 
 class filter{
-	private:
-	public:
-		convolution
+private:
+public:
+	static Eigen::MatrixXd convolution(const Eigen::MatrixXd &kernel,const Eigen::MatrixXd &m);
 };
 #endif

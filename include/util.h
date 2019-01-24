@@ -1,10 +1,16 @@
 #ifndef UTIL_H
 #define UTIL_H
+
+/// Use only includes needed in the header
 #include <cv.h>
 #include <highgui.h>
 #include <iostream>
 #include <Eigen/Dense>
 #include <fstream>
+
+
+/// NEVER USE using namespace IN HEADERS - NEVER
+
 using namespace Eigen;
 using namespace cv;
 using namespace std;
@@ -34,7 +40,7 @@ public:
 	/**
 	The distance between two pixels
 	*/
-	static double distance(int x1, int y1, int x2, int y2);
+	static double distance(double x1, double y1, double x2, double y2);
 
 	/**
 	convert Mat image file into matrix
@@ -59,7 +65,10 @@ public:
 	/**
 	The bilinear interpolation. Pixels need interpolating should = -1
 	*/
-	static MatrixXd bilinear_inter(const MatrixXd &m,double theta,int xc,int yc);
+	static MatrixXd bilinear_inter(const MatrixXd &m,const MatrixXd &m_rotation,double theta,int xc,int yc);
+
+	static MatrixXd bilinear_inter_squeeze(const MatrixXd &m,const MatrixXd &m_rotation,double t,double ratio,int k,int xc,int yc);
+	static MatrixXd bilinear_inter_naive(const MatrixXd &m);
 
 	/**
 	The bicubic interpolation. Pixels need interpolating should = -1

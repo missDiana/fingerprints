@@ -22,8 +22,11 @@ private:
 	static double findDegree(const MatrixXd &m1,double d);
 
 
+
+
 public:
 
+	static double squeezFunction(int i,int j,int xc, int yc,double ratio,double k);
 	/**
 	* @param xc is the x part of the center of the image
 	* @param yc is the y part of the center of the image
@@ -47,6 +50,8 @@ public:
 	* @return matrix generated after eucledian tranformation
 	*/
 	static MatrixXd euclidien(const MatrixXd &m, double angle,int a,int b,int xc,int yc);
+	static MatrixXd squeezedRotation(const MatrixXd &m, double angle,int xc,int yc);
 	static Mat warpingFinger(const Mat &img1, const Mat &img2);
+
 };
 #endif

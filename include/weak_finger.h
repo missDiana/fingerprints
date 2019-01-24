@@ -41,6 +41,7 @@ private:
 	@param img1 The clean finger
 	@param img2 The weak finger
 	@param num The number of directions
+	@TODO Try to avoid using complex type as return parameters. Pass it as an argument of your function with non const reference
 	*/
 	static double *getKlist(const Mat &img1, const Mat &img2,int num);
 

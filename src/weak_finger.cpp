@@ -52,7 +52,7 @@ Mat weak_finger::weakFinger(const Mat &img1, const Mat &img2, int n){
 				img.at<uchar>(i,j,0) = 255;
 			}
 			else {
-				int val = (int)(weak_finger::function_c1(d,k[section]) * img1.at<uchar>(i,j,0));
+				int val = round(weak_finger::function_c1(d,k[section]) * img1.at<uchar>(i,j,0));
 				if((val>255)) {
 					img.at<uchar>(i,j,0) = 255;
 				}
@@ -77,7 +77,7 @@ double weak_finger::calcul_k(const Mat &img1, const Mat &img2,double degree1, do
 		for(int j=0;j<img1.cols;j++){
 			double x = i - *xc;
 			double y = j - *yc;
-			double r = sqrt((x*x+y*y));
+			//double r = sqrt((x*x+y*y));
 			double theta = atan2(y,x);
 			if((theta>=degree1)&(theta<=degree2)){
 				//cout<<"d1 = "<<degre1<<", d2 = "<<degre2<<", d = "<<theta<<endl;
