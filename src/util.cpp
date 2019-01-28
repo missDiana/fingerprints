@@ -43,7 +43,7 @@ Mat util::getImage(const MatrixXd &m) {
 		for(int j=0;j<img.cols;j++){
 			//int val = round(m(i,j)*255);
 			int val = m(i,j);
-			img.at<uchar>(i,j,0) = (uchar)val;
+			img.at<uchar>(i,j,0) = val;
 		}
 	}
 	return img;
