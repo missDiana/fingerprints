@@ -41,7 +41,8 @@ Mat util::getImage(const MatrixXd &m) {
 	Mat img(m.rows(),m.cols(),CV_8UC1);
 	for(int i=0;i<img.rows;i++){
 		for(int j=0;j<img.cols;j++){
-			int val = round(m(i,j)*255);
+			//int val = round(m(i,j)*255);
+			int val = m(i,j);
 			img.at<uchar>(i,j,0) = (uchar)val;
 		}
 	}

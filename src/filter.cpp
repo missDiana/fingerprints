@@ -1,3 +1,4 @@
+
 #include <util.h>
 #include <warping.h>
 #include <weak_finger.h>
@@ -55,16 +56,18 @@ cv::Mat filter::fft_matrix(const cv::Mat I, const cv::Mat kernel) {
 	cv::split(complexI, planesI);
 	cv::split(complexKernel, planesKernel);
 
-	cv::Mat FIReal[] = {Mat_<float>(planesI[0]), Mat::zeros(planesI[0].size(), CV_32F)};
-	cv::Mat FIImag[] = {Mat_<float>(planesI[1]), Mat::zeros(planesI[1].size(), CV_32F)};
+	cv::Mat resultReal[] = {Mat_<float>(planesI[0]), Mat::zeros(planesI[0].size(), CV_32F)};
+	cv::Mat resultImag[] = {Mat_<float>(planesI[1]), Mat::zeros(planesI[1].size(), CV_32F)};
 
-	cv::Mat FkernelReal[] = {Mat_<float>(planesKernel[0]), Mat::zeros(planesKernel[0].size(), CV_32F)};
-	cv::Mat FkernelImag[] = {Mat_<float>(planesKernel[1]), Mat::zeros(planesKernel[1].size(), CV_32F)};
-
-	
 	for(int i=0;i<m;i++) {
 		for(int j=0;j<n;j++) {
-
+			resultReal[i,j] = planesI[0][i,j]*planesKernel[0][i,j]-planesI[1][i,j]*planesKernel[1][i,j];
+			resultImag[i,j] = planesI[0][i,j]*planesKernel[1][i,j]+planesI[1][i,j]*planesKernel[0][i,j];
 		}
 	}
+
+	cv::merge(resultReal, 2, resultImag);
+	cv::Mat result;
+	cv::dft(complexI, result,cv::DFT_INVERSE);
+	return result;
 }

@@ -30,11 +30,11 @@ int main(int argc, char* argv[]) {
 	//double degree = findDegree(m2,1,*xc1,*yc1);
 	int xc = 3*m1.rows()/4;
 	int yc = m1.cols()/2;
-	Eigen::MatrixXd m4 = warping::squeezedRotation(m1,-30,xc,yc);
+	//Eigen::MatrixXd m4 = warping::squeezedRotation(m1,-30,xc,yc);
 	//Eigen::MatrixXd m4 = warping::rotation(m1,-45,*xc1,*yc1);
 	//cout<<"haha"<<endl;
 	//Mat im3 = warping::warpingFinger(image,image3);
-	cv::Mat im3 = util::getImage(m4);
+	//cv::Mat im3 = util::getImage(m4);
 	cout<<"right"<<endl;
 	Matrix3d m,h;
 	m << 1,2,3,
@@ -46,9 +46,12 @@ int main(int argc, char* argv[]) {
 
 	MatrixXd mc = filter::convolution(h,m);
 	cout<<"m = "<<mc<<endl;
-  	namedWindow( "Display Image", WINDOW_AUTOSIZE );
-  	imshow( "Display Image", im3);
-  	imwrite("./warp1.png",im3);
+	cv::Mat M = getImage(m);
+	cv::Mat H = getImage(h);
+	cv::Mat R = fft_matrix(M,H);
+  	//namedWindow( "Display Image", WINDOW_AUTOSIZE );
+  	//imshow( "Display Image", im3);
+  	//imwrite("./warp1.png",im3);
   	waitKey(0);
   	return 0;
 }

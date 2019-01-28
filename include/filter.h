@@ -1,3 +1,4 @@
+
 #ifndef FILTER_H
 #define FILTER_H
 #include <cv.h>
