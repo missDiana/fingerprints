@@ -1,5 +1,6 @@
 #include <cv.h>
 #include <highgui.h>
+#include <opencv/cv.hpp>
 #include <iostream>
 #include <Eigen/Dense>
 #include <fstream>
@@ -45,7 +46,7 @@ int main(int argc, char* argv[]) {
 	MatrixXd mc = filter::convolution(h,m);
 	//cout<<"m = "<<mc<<endl;h
 
-	MatrixXd g = filter::gaussianBlur(15,3);
+	MatrixXd g = filter::gaussianBlur(15,10);
 	cv::Mat R = filter::fft_matrix(image,g);
 	//cout<<"m = \n"<<M<<endl;
 	cout<<"R = \n"<<R<<endl;
