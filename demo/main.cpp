@@ -43,13 +43,14 @@ int main(int argc, char* argv[]) {
 		  1,1,1;
 	h = h/2;
 	MatrixXd m = util::getMatrix(image);
-	MatrixXd mc = filter::convolution(h,m);
+	MatrixXd mc = filter::convolution_local(m,15);
 	//cout<<"m = "<<mc<<endl;h
 
 	MatrixXd g = filter::gaussianBlur(15,10);
-	cv::Mat R = filter::fft_matrix(image,g);
+	cv::Mat R = util::getImage(mc);
+	//cv::Mat R = filter::fft_matrix(image,g);
 	//cout<<"m = \n"<<M<<endl;
-	cout<<"R = \n"<<R<<endl;
+	//cout<<"R = \n"<<R<<endl;
 	cout<<"rows = "<<R.rows<<endl;
 	cout<<"cols = "<<R.cols<<endl;
   	cv::namedWindow( "Display Image", WINDOW_AUTOSIZE );

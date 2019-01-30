@@ -117,7 +117,7 @@ cv::Mat filter::fft_matrix(const cv::Mat I, const Eigen::MatrixXd k) {
    	Mat q3(magI, Rect(cx, cy, cx, cy)); // Bottom-Right
 
    	Mat tmp;                           // swap quadrants (Top-Left with Bottom-Right)
-   	q0.copyTo(tmp);
+   	q0.copyTo(tmp);const Eigen::MatrixXd &kernel,
    	q3.copyTo(q0);
    	tmp.copyTo(q3);
 
@@ -140,14 +140,72 @@ cv::Mat filter::fft_matrix(const cv::Mat I, const Eigen::MatrixXd k) {
 }
 
 Eigen::MatrixXd filter::gaussianBlur(int size, double sd) {
-	MatrixXd g(size,size);
+	MatrixXd g = MatrixXd::Zero(size,size);
 	int index = size/2;
-	for(int i=0;i<size;i++) {
-		for(int j=0;j<size;j++){
-			double x = i - index;
-			double y = j - index;
-			g(i,j) = 1/(2*M_PI*sd*sd)*exp(-(x*x+y*y)/(2*sd*sd));
+	if (sd==0) {
+		g(size/2,size/2) = 1;
+	}
+	else {
+		for(int i=0;i<size;i++) {
+			for(int j=0;j<size;j++){
+				double x = i - index;
+				double y = j - index;
+				g(i,j) = 1/(2*M_PI*sd*sd)*exp(-(x*x+y*y)/(2*sd*sd));
+			}
 		}
 	}
 	return g/g.sum();
+}
+
+Eigen::MatrixXd filter::kernelFunction(int i, int j, int size, const Eigen::MatrixXd &m) {
+	double k = 1;
+	int *xc = new int(0);
+	int *yc = new int(0);
+	util::getCenter(m,xc,yc);
+	return gaussianBlur(size,util::distance(i,j,*xc,*yc)*k);
+}
+
+Eigen::MatrixXd filter::convolution_local(const Eigen::MatrixXd &m,int size_kernel) {
+	MatrixXd mc = m;
+	int k = (size_kernel-1)/2;
+	for (int i=0;i<m.rows();i++) {
+		for (int j=0;j<m.cols();j++) {
+			/*if (m(i,j)==0) {
+				mc(i,j) = 0.003;
+			}*/
+			mc(i,j) = 1;
+		}
+	}
+	int *xc = new int(0);
+	int *yc = new int(0);
+	util::getCenter(m,xc,yc);
+	Vector4d d;
+	d << util::distance(0,0,*xc,*yc),util::distance(m.rows(),0,*xc,*yc),util::distance(0,m.cols(),*xc,*yc),util::distance(m.rows(),m.cols(),*xc,*yc);
+	MatrixXf::Index max;
+  	double dmax = d.maxCoeff(&max);
+	cout<<"dmax = "<<dmax<<endl;
+	int c = 5;
+	int num = 1+(int)(dmax/c);
+	MatrixXd *ker = new MatrixXd[num];
+	for (int i=0;i<num;i++) {
+		//int val = (int)(util::distance(i,j,*xc,*yc)/10);
+		ker[i] = gaussianBlur(size_kernel,1.5*log(i/6.0+1));
+	}
+	int n = 0;
+	for (int i=k;i<m.rows()-k;i++) {
+		for (int j=k;j<m.cols()-k;j++) {
+			double sum = 0;
+			int val = (int)(util::distance(i,j,*xc,*yc)/c);
+			MatrixXd kernel = ker[val];
+			for(int x=0;x<size_kernel;x++) {
+				for(int y=0;y<size_kernel;y++){
+					sum = sum + kernel(kernel.rows()-1-x,kernel.cols()-1-y)*m(i-k+x,j-k+y);
+				}
+			}
+			mc(i,j) = sum;
+			n++;
+			cout<<n<<"/"<<pow((m.rows()-2*k),2)<<" done"<<endl;
+		}
+	}
+	return mc;
 }
