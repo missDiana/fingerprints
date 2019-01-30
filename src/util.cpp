@@ -41,15 +41,15 @@ Mat util::getImage(const MatrixXd &m) {
 	Mat img(m.rows(),m.cols(),CV_8UC1);
 	for(int i=0;i<img.rows;i++){
 		for(int j=0;j<img.cols;j++){
-			//int val = round(m(i,j)*255);
-			int val = m(i,j);
-			img.at<uchar>(i,j,0) = val;
+			int val = round(m(i,j)*255);
+			//int val = m(i,j);
+			img.at<uchar>(i,j,0) = (uchar)val;
 		}
 	}
 	return img;
 }
 
-//main course 1 decrease an image
+//main course 1 decrease an imagenormalize(magI, magI, 0, 1, CV_MINMAX);
 //get major axis of ellipse
 double util::getMajorAxis(const MatrixXd &image) {
 	int xc = image.rows()/2;
