@@ -8,29 +8,22 @@
 #include <Eigen/Dense>
 #include <fstream>
 
-
-/// NEVER USE using namespace IN HEADERS - NEVER
-
-using namespace Eigen;
-using namespace cv;
-using namespace std;
-
 class util {
 private:
 	/**
 	symmetric schemes for first order derivative on direction x
 	*/
-	static double fx(int i,int j,MatrixXd &m);
+	static double fx(int i,int j,Eigen::MatrixXd &m);
 
 	/**
 	symmetric schemes for first order derivative on direction y
 	*/
-	static double fy(int i,int j,MatrixXd &m);
+	static double fy(int i,int j,Eigen::MatrixXd &m);
 
 	/**
 	symmetric schemes for second order derivative
 	*/
-	static double fxy(int i,int j,MatrixXd &m);
+	static double fxy(int i,int j,Eigen::MatrixXd &m);
 
 	/**
 	if b>=0 return a^b, else return 0
@@ -45,76 +38,76 @@ public:
 	/**
 	convert Mat image file into matrix
 	*/
-	static MatrixXd getMatrix(const Mat &img);
+	static Eigen::MatrixXd getMatrix(const cv::Mat &img);
 
 	/**
 	convert matrix into Mat image file
 	*/
-	static Mat getImage(const MatrixXd &m);
+	static cv::Mat getImage(const Eigen::MatrixXd &m);
 
 	/**
 	Return the major axis of the fingerprint
 	*/
-	static double getMajorAxis(const MatrixXd &image);
+	static double getMajorAxis(const Eigen::MatrixXd &image);
 
 	/**
 	Return the minor axis of the fingerprint
 	*/
-	static double getMinorAxis(const MatrixXd &image);
+	static double getMinorAxis(const Eigen::MatrixXd &image);
 
 	/**
 	The bilinear interpolation. Pixels need interpolating should = -1
 	*/
-	static MatrixXd bilinear_inter(const MatrixXd &m,const MatrixXd &m_rotation,double theta,int xc,int yc);
+	static Eigen::MatrixXd bilinear_inter(const Eigen::MatrixXd &m,const Eigen::MatrixXd &m_rotation,double theta,int xc,int yc);
 
-	static MatrixXd bilinear_inter_squeeze(const MatrixXd &m,const MatrixXd &m_rotation,double t,double ratio,int k,int xc,int yc);
-	static MatrixXd bilinear_inter_naive(const MatrixXd &m);
+	static Eigen::MatrixXd bilinear_inter_squeeze(const Eigen::MatrixXd &m,const Eigen::MatrixXd &m_rotation,double t,double ratio,int k,int xc,int yc);
+	static Eigen::MatrixXd bilinear_inter_naive(const Eigen::MatrixXd &m);
 
 	/**
 	The bicubic interpolation. Pixels need interpolating should = -1
 	*/
-	static void bicubic_inter(MatrixXd &m);
+	static void bicubic_inter(Eigen::MatrixXd &m);
 
 	/**
 	The values of major axis, minor axis, coordinate of the center are resp. restored
 	in axisL, axisS, xc and yc
 	*/
-	static void getInfo(const MatrixXd &m,double *axisL,double *axisS,int *xc,int *yc);
+	static void getInfo(const Eigen::MatrixXd &m,double *axisL,double *axisS,int *xc,int *yc);
 
 	/**
 	Print the max and min intensity in a grey scale image
 	*/
-	static void range(Mat img);
+	static void range(cv::Mat img);
 
 	/**
 	change some blocks of an image into black and white
 	*/
-	static Mat changeBlock(Mat &image);
+	static cv::Mat changeBlock(cv::Mat &image);
 
 	/**
 	Symmetric transform along the axis x
 	*/
-	static Mat sym_x(Mat &image);
+	static cv::Mat sym_x(cv::Mat &image);
 
 	/**
 	Symmetric transform along the axis y
 	*/
-	static Mat sym_y(Mat &image);
+	static cv::Mat sym_y(cv::Mat &image);
 
 	/**
 	Symmetric transform along the diagonal x
 	*/
-	static Mat sym_x_diag(Mat &image);
+	static cv::Mat sym_x_diag(cv::Mat &image);
 
 	/**
 	Symmetric transform along the diagonal y
 	*/
-	static Mat sym_y_diag(Mat &image);
+	static cv::Mat sym_y_diag(cv::Mat &image);
 
 	/**
 	Restore the center of the fingerprint into x and y
 	*/
-	static void getCenter(const MatrixXd &m,int *x, int *y);
+	static void getCenter(const Eigen::MatrixXd &m,int *x, int *y);
 
 };
 #endif

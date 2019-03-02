@@ -5,9 +5,7 @@
 #include <iostream>
 #include <Eigen/Dense>
 #include <fstream>
-using namespace Eigen;
-using namespace cv;
-using namespace std;
+
 class weak_finger {
 private:
 	/**
@@ -23,7 +21,7 @@ private:
 	@param j Coordinate of the pixel
 	@param n Number of directions
 	*/
-	static int getSection(int i,int j,int n, const Mat &image);
+	static int getSection(int i,int j,int n, const cv:Mat &image);
 
 	/**
 	Auxilary function to determine the parameter of the weight
@@ -33,7 +31,7 @@ private:
 	@param degree1 The coordinate theta in polar system of the first line
 	@param degree2 The coordinate theta in polar system of the second line
 	*/
-	static double calcul_k(const Mat &img1, const Mat &img2,double degree1, double degree2);
+	static double calcul_k(const cv:Mat &img1, const cv:Mat &img2,double degree1, double degree2);
 
 	/**
 	Auxilary function to determine the parameter of the weight
@@ -43,7 +41,7 @@ private:
 	@param num The number of directions
 	@TODO Try to avoid using complex type as return parameters. Pass it as an argument of your function with non const reference
 	*/
-	static double *getKlist(const Mat &img1, const Mat &img2,int num);
+	static double *getKlist(const cv:Mat &img1, const cv:Mat &img2,int num);
 
 	/**
 	 * Calculate the distance between two points
@@ -62,7 +60,7 @@ public:
 	@param img2 The weak finger
 	@param n Number of directions of anisotropy
 	*/
-	Mat static weakFinger(const Mat &img1, const Mat &img2, int n);
+	cv:Mat static weakFinger(const cv:Mat &img1, const cv:Mat &img2, int n);
 };
 
 #endif

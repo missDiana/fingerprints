@@ -12,7 +12,6 @@
 #include <fstream>
 
 
-/// Avoid using namespace in .cpp when it is not a main
 using namespace Eigen;
 using namespace cv;
 using namespace std;
@@ -110,21 +109,7 @@ MatrixXd util::bilinear_inter(const MatrixXd &m,const MatrixXd &m_rotation,doubl
 						p << m(xint,yint), m(xint+1,yint), m(xint,yint+1), m(xint+1,yint+1);
 						w << 1.0/util::distance(xint,yint,x,y),1.0/util::distance(xint+1,yint,x,y),1.0/util::distance(xint,yint+1,x,y),1.0/util::distance(xint+1,yint+1,x,y);
 					w = (1/w.sum())*w;
-					/*
-					int n = 0;
-					double s = 0;
-					for (int k=0;k<4;k++) {
-						if(p(k)>=0) {
-							s = s + p(k)*w(k);
-							n++;
-						}
-					}
-					if(n!=0) {
-						mp(i,j) = s/n;
-					}
-					*/
 					mp(i,j) = p.dot(w);
-					//cout<<"m ="<<mp(i,j)<<endl;
 				}
 			}
 		}
@@ -241,87 +226,8 @@ double util::power(double a, double b) {
 	}
 }
 
-//interpolation
-void util::bicubic_inter(MatrixXd &m) {
-	MatrixXd A(16,16);
-	VectorXd b(16);
-	for(int i=2;i<m.rows()-2;i++) {
-		for(int j=2;j<m.cols()-2;j++) {
-			if (m(i,j)==1) {
-				for (int x=0;x<4;x++) {
-					for (int y=0;y<4;y++) {
-						A(0,4*y+x) = power(i-1,x)*power(j-1,y);
-						A(1,4*y+x) = power(i-1,x)*power(j+1,y);
-						A(2,4*y+x) = power(i+1,x)*power(j-1,y);
-						A(3,4*y+x) = power(i+1,x)*power(j+1,y);
-						A(4,4*y+x) = x*power(i-1,x-1)*power(j-1,y);
-						A(5,4*y+x) = x*power(i-1,x-1)*power(j+1,y);
-						A(6,4*y+x) = x*power(i+1,x-1)*power(j-1,y);
-						A(7,4*y+x) = x*power(i+1,x-1)*power(j+1,y);
-						A(8,4*y+x) = y*power(i-1,x)*power(j-1,y-1);
-						A(9,4*y+x) = y*power(i-1,x)*power(j+1,y-1);
-						A(10,4*y+x) = y*power(i+1,x)*power(j-1,y-1);
-						A(11,4*y+x) = y*power(i+1,x)*power(j+1,y-1);
-						A(12,4*y+x) = x*y*power(i-1,x-1)*power(j-1,y-1);
-						A(13,4*y+x) = x*y*power(i-1,x-1)*power(j+1,y-1);
-						A(14,4*y+x) = x*y*power(i+1,x-1)*power(j-1,y-1);
-						A(15,4*y+x) = x*y*power(i+1,x-1)*power(j+1,y-1);
-					}
-				}
-				b(0) = m(i-1,j-1);
-				b(1) = m(i-1,j+1);
-				b(2) = m(i+1,j-1);
-				b(3) = m(i+1,j+1);
-
-				b(4) = fx(i-1,j-1,m);
-				b(5) = fx(i-1,j+1,m);
-				b(6) = fx(i+1,j-1,m);
-				b(7) = fx(i+1,j+1,m);
-
-				b(8) = fy(i-1,j-1,m);
-				b(9) = fy(i-1,j+1,m);
-				b(10) = fy(i+1,j-1,m);
-				b(11) = fy(i+1,j+1,m);
-
-				b(12) = fxy(i-1,j-1,m);
-				b(13) = fxy(i-1,j+1,m);
-				b(14) = fxy(i+1,j-1,m);
-				b(15) = fxy(i+1,j+1,m);
-
-				VectorXd X = A.colPivHouseholderQr().solve(b);
-				double val;
-				for (int x=0;x<4;x++) {
-					for (int y=0;y<4;y++) {
-						val = X(4*y+x)*pow(i,x)*pow(j,y);
-					}
-				}
-			}
-		}
-	}
-}
 
 
-
-//Imaged tried of double size
-/*MatrixXd rotation(const MatrixXd &m, double angle){
-	angle = angle/180;
-	MatrixXd rm(2*m.rows(),2*m.cols());
-	for(int i=0;i<2*rm.rows();i++){
-		for(int j=0;j<2*rm.cols();j++){
-			rm(i,j)=1;
-		}
-	}
-	for(int i=0;i<2*rm.rows();i++){
-		for(int j=0;j<2*rm.cols();j++){
-				int ip = round(cos(angle)*i - sin(angle)*j);
-				int jp = round(sin(angle)*i +cos(angle)*j);
-				if((ip>=0) & (ip<rm.rows()) & (jp>=0) & (jp<rm.cols())) {
-					rm(ip,jp) = m(i,j);
-				}
-		}
-	}
-  return rm;
-}*/
 
 void util::getInfo(const MatrixXd &m,double *axisL,double *axisS,int *xc,int *yc) {
 	int a1=2*m.rows();

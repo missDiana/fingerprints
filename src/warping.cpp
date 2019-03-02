@@ -34,7 +34,6 @@ MatrixXd warping::rotation(const MatrixXd &m, double angle,int xc,int yc){
 		}
 	}
   	return util::bilinear_inter(m,rm,angle,xc,yc);
-	//return rm;
 }
 
 MatrixXd warping::translation(const MatrixXd &m, int a,int b) {
@@ -84,7 +83,6 @@ double warping::findDegree(const MatrixXd &m1,double d) {
 		MatrixXd m3 = rotation(m1,i*d,xc,yc);
 		axis(i) = util::getMajorAxis(m3);
 	}
-	//cout<<"degree="<<diff<<endl;
 	MatrixXf::Index max;
   	axis.maxCoeff(&max);
 	return (max*d);
@@ -93,14 +91,6 @@ double warping::findDegree(const MatrixXd &m1,double d) {
 MatrixXd warping::squeezedRotation(const MatrixXd &m, double angle,int xc,int yc) {
 	angle = M_PI*angle/180;
 	MatrixXd rm(m.rows(),m.cols());
-	/*
-	double *a = new double(0);
-	double *b = new double(0);
-	int *x = new int(0);
-	int *y = new int(0);
-	util::getInfo(m,a,b,x,y);
-	double ratio = *a/(*b);
-	*/
 	double ratio = util::getMajorAxis(m)/util::getMinorAxis(m);
 	cout<<"ratio = "<<ratio<<endl;
 	double k = 60;
@@ -119,7 +109,6 @@ MatrixXd warping::squeezedRotation(const MatrixXd &m, double angle,int xc,int yc
 			}
 		}
 	}
-	//return rm;
   	return util::bilinear_inter_naive(rm);
 }
 

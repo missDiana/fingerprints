@@ -38,7 +38,6 @@ Mat weak_finger::weakFinger(const Mat &img1, const Mat &img2, int n){
 	for(int i=0;i<img.rows;i++){
 		for(int j=0;j<img.cols;j++){
 			int section = weak_finger::getSection(i,j,n,img1);
-			//cout<<"section = "<<section<<endl;
 			if((section<0) | (section>=n) ){
 				cout<<"section = "<<section<<endl;
 			}
@@ -77,24 +76,16 @@ double weak_finger::calcul_k(const Mat &img1, const Mat &img2,double degree1, do
 		for(int j=0;j<img1.cols;j++){
 			double x = i - *xc;
 			double y = j - *yc;
-			//double r = sqrt((x*x+y*y));
 			double theta = atan2(y,x);
 			if((theta>=degree1)&(theta<=degree2)){
-				//cout<<"d1 = "<<degre1<<", d2 = "<<degre2<<", d = "<<theta<<endl;
 				double i2 = (int)img2.at<uchar>(i,j,0);
 				double i1 = (int)img1.at<uchar>(i,j,0);
 				if( (util::distance(*xc,*yc,i,j)!=0) & (i2!=0) & (i1!=0)){
-					//cout <<"bizhi = "<<i2/i1<<endl;
-					//cout<<"juli = "<<distance(xc,yc,i,j)<<endl;
 					double c = (log(i2/i1))/util::distance(*xc,*yc,i,j);
 					s = s+c;
 					n++;
 				}
 			}
-			else {
-				//cout<<"d1 = "<<degre1<<", d2 = "<<degre2<<", d = "<<theta<<endl;
-			}
-
 		}
 	}
 	s = s/n;
@@ -106,7 +97,6 @@ double * weak_finger::getKlist(const Mat &img1, const Mat &img2,int num) {
 	double *k = new double[num];
 	for(int i=0;i<num;i++) {
 		k[i] = weak_finger::calcul_k(img1, img2,i*360/num-180, (i+1)*360/num-180);
-		//cout<<"c = "<<c[i]<<endl;
 	}
 	return k;
 }
